@@ -8,3 +8,5 @@ __pycache__/
 .idea/
 staticfiles/
 backups/*.sql
+
+backups_output/

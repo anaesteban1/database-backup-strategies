@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Backup Strategies</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 950px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.08);
+        }
+
+        h1 {
+            color: #1f4e79;
+        }
+
+        h2 {
+            color: #2f6690;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 6px 0 12px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: #1f4e79;
+            color: white;
+            border: 0;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        code {
+            background: #eeeeee;
+            padding: 3px 6px;
+            border-radius: 4px;
+        }
+
+        .status {
+            background: #e8f5e9;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        .registro {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Database Backup Strategies</h1>
+
+    <p>
+        Aplicación demostrativa desarrollada por
+        <strong>Ana Esteban</strong> y
+        <strong>Saúl Alvarado</strong>.
+    </p>
+
+    <p class="status">
+        Aplicación activa ✅ |
+        Motor actual: <strong>{{ motor }}</strong>
+    </p>
+</div>
+
+<div class="card">
+
+    <h2>Registrar información de prueba</h2>
+
+    <p>
+        Estos registros permiten demostrar que los datos pueden ser
+        respaldados y posteriormente restaurados.
+    </p>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <label>Nombre</label>
+        <input
+            type="text"
+            name="nombre"
+            placeholder="Ejemplo: Registro de prueba"
+            required
+        >
+
+        <label>Descripción</label>
+        <textarea
+            name="descripcion"
+            placeholder="Información almacenada en la base de datos"
+        ></textarea>
+
+        <button type="submit">
+            Guardar registro
+        </button>
+
+    </form>
+
+</div>
+
+<div class="card">
+
+    <h2>Datos almacenados</h2>
+
+    {% for registro in registros %}
+
+        <div class="registro">
+
+            <strong>{{ registro.nombre }}</strong>
+
+            <p>{{ registro.descripcion }}</p>
+
+            <small>
+                {{ registro.creado }}
+            </small>
+
+        </div>
+
+    {% empty %}
+
+        <p>
+            Todavía no existen registros.
+        </p>
+
+    {% endfor %}
+
+</div>
+
+<div class="card">
+
+    <h2>Estrategia de respaldo</h2>
+
+    <p>
+        El proyecto utiliza MySQL en producción y demuestra
+        respaldos lógicos mediante <code>mysqldump</code>.
+    </p>
+
+    <h3>1. Full Backup</h3>
+
+    <p>
+        Se genera una copia completa de la base de datos.
+    </p>
+
+    <h3>2. Automated Backup</h3>
+
+    <p>
+        El proceso puede programarse periódicamente para evitar
+        depender de respaldos manuales.
+    </p>
+
+    <h3>3. Backup Retention</h3>
+
+    <p>
+        Los respaldos pueden conservarse por fecha para permitir
+        recuperar diferentes versiones de la información.
+    </p>
+
+</div>
+
+</body>
+</html>
