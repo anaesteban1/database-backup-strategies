@@ -54,3 +54,16 @@ Los cambios enviados a la rama main generan automaticamente un nuevo despliegue 
 
 Ana Esteban
 Saul Alvarado
+
+## Restauracion de respaldos
+
+Para restaurar un respaldo de PostgreSQL generado con pg_dump se puede utilizar pg_restore.
+
+Ejemplo:
+
+pg_restore --dbname=DATABASE_URL archivo_backup.dump
+
+La restauracion permite recuperar la informacion almacenada despues de una perdida de datos, error humano o fallo del sistema.
+
+Este procedimiento complementa la estrategia de respaldos del proyecto al permitir recuperar una version previamente almacenada de la base de datos PostgreSQL.
+
