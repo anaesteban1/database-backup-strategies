@@ -7,35 +7,30 @@ Proyecto grupal desarrollado por:
 
 ## Objetivo
 
-Demostrar estrategias de respaldo de bases de datos sin utilizar Microsoft SQL Server.
+Demostrar estrategias de respaldo de bases de datos evitando Microsoft SQL Server.
 
 ## Tecnologias
 
 - Python
 - Django
-- MySQL
-- PyMySQL
-- mysqldump
+- PostgreSQL
+- pg_dump
 - GitHub
-- Railway
+- Render
 
 ## Estrategias de respaldo
 
 ### Full Backup
 
-Se utiliza mysqldump para generar una copia logica completa de la base de datos MySQL.
+Se utiliza pg_dump para crear un respaldo logico de PostgreSQL.
 
 ### Automated Backup
 
-El script de PowerShell ubicado en:
-
-scripts/backup_mysql.ps1
-
-permite automatizar la generacion de respaldos.
+El proceso de backup puede programarse para ejecutarse periodicamente sin intervencion manual.
 
 ### Backup Retention
 
-Los archivos de respaldo se identifican mediante fecha y hora para permitir mantener diferentes versiones.
+Los archivos se generan con fecha y hora para conservar diferentes versiones de respaldo.
 
 ## Arquitectura
 
@@ -43,18 +38,19 @@ Usuario
   |
 Django
   |
-MySQL
+PostgreSQL
   |
-mysqldump
+pg_dump
   |
-Backup SQL
+Backup
 
-## Despliegue
+## Despliegue automatizado
 
-El codigo fuente se almacena en GitHub y la aplicacion se despliega en Railway.
+El repositorio publico de GitHub esta conectado a Render.
 
-El repositorio GitHub queda conectado al servicio cloud para permitir despliegues automaticos cuando se publican nuevos cambios.
+Los cambios enviados a la rama main generan automaticamente un nuevo despliegue del servicio.
 
 ## Autores
 
-Ana Esteban y Saul Alvarado
+Ana Esteban
+Saul Alvarado

@@ -1,9 +1,14 @@
 ﻿import os
 from pathlib import Path
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-backup-strategies-demo")
+SECRET_KEY = os.getenv(
+    "SECRET_KEY",
+    "django-insecure-local-backup-strategies"
+)
+
 DEBUG = os.getenv("DEBUG", "True").lower() == "true"
 
 ALLOWED_HOSTS = ["*"]
@@ -48,27 +53,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "backup_project.wsgi.application"
 
-if os.getenv("MYSQLHOST"):
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.mysql",
-            "NAME": os.getenv("MYSQLDATABASE"),
-            "USER": os.getenv("MYSQLUSER"),
-            "PASSWORD": os.getenv("MYSQLPASSWORD"),
-            "HOST": os.getenv("MYSQLHOST"),
-            "PORT": os.getenv("MYSQLPORT", "3306"),
-            "OPTIONS": {
-                "charset": "utf8mb4",
-            },
-        }
-    }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
+DATABASES = {
+    "default": dj_database_url.config(
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
+}
 
 AUTH_PASSWORD_VALIDATORS = []
 
